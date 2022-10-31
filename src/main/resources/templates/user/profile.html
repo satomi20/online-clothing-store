@@ -1,0 +1,99 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>SMS - Женская одежда премиум класса</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/home.css" th:href="@{/css/home.css}">
+<!--    <link rel="stylesheet" type="text/css" href="/static/css/navi.css" th:href="@{/css/navi.css}">-->
+
+
+
+
+</head>
+<body>
+<header th:replace="fragments/general.html :: header"></header>
+
+<div class="container-cfg">
+<h1>User Info</h1>
+<table>
+    <tbody>
+    <tr>
+        <td>Full Name:</td>
+        <td th:text="${user.getFirstName()}"></td>
+    </tr>
+    <tr>
+        <td>Last Name:</td>
+        <td th:text="${user.getLastName()}"></td>
+    <tr>
+        <td>Email:</td>
+        <td th:text="${user.getEmail()}"></td>
+    </tr>
+    <tr>
+        <td>Phone Number:</td>
+        <td th:text="${user.getPhoneNumber()}"></td>
+    </tr>
+    </tbody>
+</table>
+<table>
+    <th:block th:each="addresses : ${address}">
+        <tr>
+            <td>Address:</td>
+            <td th:text="${addresses.getAdress()}"></td>
+        </tr>
+        <tr>
+            <td>Country:</td>
+            <td th:text="${addresses.getCountry()}"></td>
+        </tr>
+        <tr>
+            <td>City:</td>
+            <td th:text="${addresses.getCity()}"></td>
+        </tr>
+    </th:block>
+</table>
+
+
+<ul class="navbar-nav">
+    <li class="nav-item">
+        <a class="nav-link text-light mx-3" th:href="@{/user/editUser}">Изменить юзера</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-light mx-3" th:href="@{/user/updateAddress}">Изменить адрес</a>
+    </li>
+</ul>
+
+
+<div class="button_popup">
+    <a href="#" id="open_pop_up">Изменить пароль и почту</a>
+</div>
+
+<div class="pop_up" id="pop_up">
+    <div class="pop_up_container">
+        <div class="pop_up_body" id="pop_up_body">
+            <p>Изменить пароль и почту</p>
+            <form method="POST" th:action="@{/user/updateInfo}">
+                    <input type="password" name="password"  placeholder="пароль" th:value="${password}">
+
+                    <input type="email" name="email"  placeholder="почта" th:value="${email}">
+
+                    <button type="submit">Изменить</button>
+            </form>
+            <div class="pop_up_close" id="pop_up_close">&#10006</div>
+        </div>
+    </div>
+</div>
+
+
+<a class="button is-light" th:href="@{/logout}" sec:authorize="isAuthenticated()">
+    Sign out
+</a>
+</div>
+
+<script th:src="@{/js/main.js}"></script>
+
+
+<footer th:replace="fragments/general.html :: footer"></footer>
+</body>
+</html>

@@ -1,3 +1,4 @@
+
 *{
     margin: 0;
     padding: 0;
@@ -6,7 +7,7 @@
 }
 
 .navbar{
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -95,3 +96,179 @@
 .link:hover{
     opacity: 1;
 }
+
+/* CSS МОДАЛЬНОГО ОКНА*/
+.button_popup{
+    margin-top: 40px;
+    text-align: center;
+}
+.button_popup a{
+    font-family: 'Montserrat', sans-serif;
+    background-color: plum;
+    padding: 20px 50px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+}
+.pop_up{
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0,0,0,.8);
+    z-index: 2;
+}
+
+.pop_up.active{
+    display: block;
+}
+
+.pop_up_container{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.pop_up_body {
+    margin: auto;
+    width: 500px;
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    padding: 100px 15px 110px 15px;
+    position: relative;
+}
+
+.pop_up_body p{
+    font-size: 28px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    color: black;
+    margin-bottom: 48px;
+}
+.pop_up_body input{
+    display: block;
+    margin: 25px auto 0px auto;
+    width: 330px;
+    padding: 17px 20px;
+    background-color: gainsboro;
+    border-radius: 10px;
+    border: none;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: grey;
+}
+
+.pop_up_body input:focus{
+    outline: none;
+}
+
+.pop_up_body button{
+    cursor: pointer;
+    display: block;
+    width: 330px;
+    margin: 60px auto 0px auto;
+    padding: 20px 0px;
+    font-family: Montserrat, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    border: none;
+    color: white;
+    border-radius: 10px;
+    background-color: plum;
+}
+
+.pop_up_close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 21px;
+    cursor: pointer;
+}
+
+/* CSS МОДАЛЬНОГО ОКНА*/
+/*ul {
+    text-align: center;
+}
+ul li {
+    display: inline-block;
+    margin-right: 15px;
+    transition: all 0.3s ease-in-out;
+}*/
+ul li:hover .submenu {
+    height: 85px;
+}
+ul li:hover a {
+    color: #ffffff;
+}
+ul li:hover a::before {
+    visibility: visible;
+    transform: scale(1, 1);
+}
+
+ul li .submenu {
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    height: 0;
+    line-height: 40px;
+    box-sizing: border-box;
+    transition: height 0.3s ease-in-out;
+    transition-delay: 0.1s;
+    display: flex;
+}
+ul li .submenu a {
+    color: #000000;
+    margin-top: 20px;
+    font-size: 16px;
+}
+ul li .submenu a:hover {
+    color: #343434;
+    text-decoration: underline;
+}
+ul li a {
+    color: #ff0000;
+    display: block;
+    padding: 0 7px 0 7px;
+    margin: 0 0 10px;
+    text-decoration: none;
+    position: relative;
+}
+ul li a::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    bottom: -10px;
+    left: 0px;
+    background-color: #ffffff;
+    transition: all 0.2s ease-in-out;
+    transform: scale(0, 0);
+    visibility: hidden;
+}
+
+.navbar-nav{
+    text-align: left;
+}
+.nav-item{
+    display: block;
+}
+
+.nav-item a{
+    text-decoration: dashed;
+    color: black;
+}
+
+.nav-item a:hover{
+    color: #21c61a;
+}
+
+
+
+

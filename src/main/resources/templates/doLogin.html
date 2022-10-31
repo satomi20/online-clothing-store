@@ -1,0 +1,38 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>SMS - Вход</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/home.css" th:href="@{/css/signup.css}">
+
+</head>
+<body>
+
+    <div sec:authorize="isAnonymous()" class="container">
+        <img th:src="@{/img/SMS.JPG}" class="logo" alt=""><input type="hidden" name="_csrf" value="8ec12704-5ab6-4f0c-a758-2fc36f2c9368"/>
+
+        <form th:action="@{/dologin}" method="POST">
+
+            <input class="input" type="email" placeholder="email" name="username" >
+            <input class="input" type="password" placeholder="password" name="password" >
+            <p th:if="${param.error}" class="has-text-danger">
+                Invalid email and password.
+            </p>
+
+            <input type="checkbox" checked class="checkbox" id="terms-and-cond">
+            <label for="terms-and-cond">agree to our <a href="">terms and conditions</a></label>
+            <br>
+            <input type="checkbox" class="checkbox" id="notification">
+            <label for="notification">recieve upcoming offers and events mails</a></label>
+            <br>
+            <button type="submit" class="submit-btn" value="Вход"></button>
+        </form>
+        <a href="/registration" class="link">У вас нет аккаунта? Зарегестрируйтесь</a>
+        <a href="/" class="link">На главную</a>
+    </div>
+
+</body>
+</html>

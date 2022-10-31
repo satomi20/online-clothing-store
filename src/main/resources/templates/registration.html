@@ -1,0 +1,42 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>SMS - Вход</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/home.css" th:href="@{/css/signup.css}">
+
+</head>
+<body>
+
+<div class="container">
+    <img th:src="@{/img/SMS.JPG}" class="logo" alt="">
+    <form method="POST" th:action="@{/registration}" th:object="${user}">
+
+
+        <input type="text" th:field="*{firstName}" placeholder="имя">
+        <p th:each="error: ${#fields.errors('firstName')}" class="has-text-danger"
+           th:text="${error}">Validation error</p>
+        <input type="email" th:field="*{email}" placeholder="email">
+        <p th:each="error : ${#fields.errors('email')}" class="has-text-danger"
+           th:text="${error}">Validation error</p>
+        <input type="password"  th:field="*{password}" placeholder="пароль">
+        <p th:each="error : ${#fields.errors('password')}" class="has-text-danger"
+           th:text="${error}">Validation error</p>
+
+        <input type="checkbox" checked class="checkbox" id="terms-and-cond">
+        <label for="terms-and-cond">agree to our <a href="">terms and conditions</a></label>
+        <br>
+        <input type="checkbox" class="checkbox" id="notification">
+        <label for="notification">recieve upcoming offers and events mails</a></label>
+        <input type="submit" class="submit-btn" value="Зарегестрироваться">
+    </form>
+    <a href="/login" class="link">Войти</a>
+    <a href="/" class="link">На главную</a>
+</div>
+
+
+</body>
+</html>

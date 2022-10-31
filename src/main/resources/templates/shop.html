@@ -1,0 +1,229 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+   <title>SMS - Женская одежда премиум класса</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/home.css" th:href="@{/css/home.css}">
+</head>
+<body>
+<header th:replace="fragments/general.html :: header"></header>
+
+<div class="url-path">
+    <div class="urlawdwaw">
+    <a href="/">Главная</a> / <a href="/shop">Магазин</a>
+    </div>
+</div>
+
+
+<div class="mainContainer">
+    <div class="product-menu-container">
+
+        <div class="sidebar_container">
+            <div class="sidebar">
+                <h2>Поиск</h2>
+                <form class="searchbar" method="get" action="/search">
+                    <input type="text" class="search-box-one" name="filter" placeholder="search">
+                    <button class="search-button"><img th:src="@{/img/search.png}" class="search-img"></button>
+                </form>
+            </div>
+
+            <div class="sidebar">
+                <ul class="sidebar-menu">
+                    <li class="have-children"><a th:href="@{/shop/category/{id} (id = ${1})}">Джемперы и кардиганы</a></li>
+                    <li class="have-children"><a th:href="@{/shop/category/{id} (id = ${2})}">Блузы и рубашки</a></li>
+                    <li class="have-children"><a th:href="@{/shop/category/{id} (id = ${3})}">Жакеты и жилеты</a></li>
+                    <li class="have-children"><a th:href="@{/shop/category/{id} (id = ${4})}">Топы и майки</a></li>
+                    <li class="have-children"><a th:href="@{/shop/category/{id} (id = ${5})}">Футболки</a></li>
+                    <li class="have-children"><a th:href="@{/shop/category/{id} (id = ${6})}">Платья и сарафаны</a></li>
+                    <li class="have-children"><a th:href="@{/shop/category/{id} (id = ${7})}">Брюки и шорты</a></li>
+                    <li class="have-children"><a th:href="@{/shop/category/{id} (id = ${8})}">Юбки</a></li>
+                    <li class="have-children"><a th:href="@{/shop/category/{id} (id = ${9})}">Костюмы</a></li>
+                    <li class="have-children"><a th:href="@{/shop/category/{id} (id = ${10})}">Верхняя одежда</a></li>
+                    <li class="have-children"><a th:href="@{/shop/category/{id} (id = ${11})}">Аксессуары</a></li>
+                    <li class="have-children"><a th:href="@{/shop/category/{id} (id = ${12})}">Головные уборы</a></li>
+                    <li class="have-children"><a th:href="@{/shop/category/{id} (id = ${13})}">Шарфы и платки</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar">
+                <div class="slide-container">
+                    <p>Цена: <span id="demo"></span></p>
+                    <input type="range" min="10" max="5000" value="50" step="10" class="slider" id="myRange">
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="custom-select">
+                    <form action="#">
+                        <div class="select-box">
+                            <label for="select-box1" class="label select-box1"><span class="label-desc">Выберите цвет</span> </label>
+                            <select id="select-box1" class="select">
+                                <option value="Choice 1">Falkland Islands</option>
+                                <option value="Choice 2">Germany</option>
+                                <option value="Choice 3">Neverland</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="button-28">Fill</button>
+                    </form>
+
+                </div>
+                <div class="custom-select">
+                    <form action="#">
+
+                        <div class="select-box">
+
+                            <label for="select-box1" class="label select-box1"><span class="label-desc">Выберите размер</span> </label>
+                            <select id="select-box1" class="select">
+                                <option value="Choice 1">Falkland Islands</option>
+                                <option value="Choice 2">Germany</option>
+                                <option value="Choice 3">Neverland</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="button-28">Fill</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <tr>
+            <th>
+                <a th:href="@{'' + ${currentPage} + '?sortField=price&sortDir=' + ${reverseSortDir}}">
+                    PRICE</a>
+            </th>
+         <!--   <th>
+                <a th:href="@{'shop/products/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
+                    Employee Last Name</a>
+            </th>
+            <th>
+                <a th:href="@{'shop/products/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+                    Employee Email</a>
+            </th>
+            <th> Actions </th>-->
+        </tr>
+
+     <div class="content">
+         <div class="product-block">
+             <div class="product-card" th:each="product : ${listProducts}">
+                  <!--th:if="${product.getId() == 1}">-->
+                 <div class="product-image" th:if="${product.getImagePath()}">
+                     <span class="discount-tag">50% скидка</span><!--здесь указать процент скидки + "% скидка"-->
+                     <a th:href="@{/shop/product/{path} (path = ${product.getId()})}"><img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                     </a>
+                     <button class="card-btn">добавить в корзину</button>
+                 </div>
+                 <div class="product-info">
+                     <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                     <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                     <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+                 </div>
+             </div>
+         </div>
+     </div>
+
+        <div th:if = "${totalPages > 1}">
+            <div class = "row col-sm-10">
+                <div class = "col-sm-2">
+                    Total Rows: [[${totalItems}]]
+                </div>
+                <div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/shop/products/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+                </div>
+                <div class = "col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/shop/products/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/shop/products/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+            </div>
+        </div>
+
+        <!--<div th:if = "${totalPages > 1}">
+            <div class = "row col-sm-10">
+                <div class = "col-sm-2">
+                    Total Rows: [[${totalItems}]]
+                </div>
+                <div class = "col-sm-1">
+					<span th:each="i: ${#numbers.sequence(1, totalPages)}">
+						<a th:if="${currentPage != i}" th:href="@{'/shop/category/' + ${categoryId} + '/' + ${i}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">[[${i}]]</a>
+						<span th:unless="${currentPage != i}">[[${i}]]</span>  &nbsp; &nbsp;
+					</span>
+                </div>
+                <div class = "col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/shop/category/' + ${categoryId} + '/' + ${currentPage + 1}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Next</a>
+                    <span th:unless="${currentPage < totalPages}">Next</span>
+                </div>
+
+                <div class="col-sm-1">
+                    <a th:if="${currentPage < totalPages}" th:href="@{'/shop/category/' + ${categoryId} + '/' + ${totalPages}+ '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir}}">Last</a>
+                    <span th:unless="${currentPage < totalPages}">Last</span>
+                </div>
+            </div>
+        </div>-->
+
+
+
+
+
+
+
+
+
+
+
+
+<!--    <li class="have-children"><a href="#"><span class="fa fa-gavel"></span>Jury</a>
+        <ul>
+            <li><a href="#">Add Jury</a></li>
+            <li><a href="#">View Juries</a></li>
+        </ul>
+    </li>
+    <li class="have-children"><a href="#"><span class="fa fa-user-o"></span>Author</a>
+        <ul>
+            <li><a href="#">Add Author</a></li>
+            <li><a href="#">View Authors</a></li>
+        </ul>
+    </li>
+    <li><a href="#"><span class="fa fa-picture-o"></span>Gallery</a></li>
+    <li class="have-children"><a href="#"><span class="fa fa-flag"></span>Reports</a>
+        <ul>
+            <li><a href="#">View Judging points</a></li>
+            <li><a href="#">Create Acceptances List</a></li>
+            <li><a href="#">Create Awarded List</a></li>
+            <li><a href="#">View Candidates for Awards</a></li>
+            <li><a href="responsive_table.html">Send Report Cards</a></li>
+        </ul>
+    </li>
+    <li><a href="#"><span class="fa fa-envelope-o"></span>Messages</a></li>
+    <li><a href="#"><span class="fa fa-gear"></span>Configuration</a></li>
+</ul>-->
+
+<!--<div class="row mt-5 ml-5">
+    <div class="product-card" th:each="prod : ${products}">
+        <div class="product-image"  th:if="${prod.getImagePath()}">
+            <span class="discount-tag">50% скидка</span>
+            <img th:src="@{/img/{path} (path = ${prod.getImagePath()})}" class="product-thumb" alt="">
+            <button class="card-btn">добавить в корзину</button>
+        </div>
+        <div class="product-info">
+            <h2 class="product-brand" th:text="${prod.getName()}"></h2>
+            <p class="product-short-des" th:text="${prod.getDescription()}"></p>
+            <span class="price" th:text="${prod.getPrice()}"></span><span class="actual-price" th:text="${prod.getOldPrice()}"></span>
+        </div>
+        <input type="hidden" name="id" th:value="${prod.getId()}"/>
+</div>
+</div>-->
+</div>
+</div>
+<script th:src="@{/js/home.js}"></script>
+<footer th:replace="fragments/general.html :: footer"></footer>
+</body>
+

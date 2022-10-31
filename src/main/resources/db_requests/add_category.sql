@@ -1,0 +1,14 @@
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Платья и сарафаны');
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Брюки и шорты');
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Юбки');
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Костюмы');
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Верхняя одежда');
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Джемперы и кардиганы');
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Блузы и рубашки');
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Жакеты и жилеты');
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Топы и майки');
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Футболки');
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Аксессуары');
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Головные уборы');
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Шарфы и платки');
+INSERT INTO `mydb`.`category` (`name`) VALUES ('Сумки и рюкзаки');

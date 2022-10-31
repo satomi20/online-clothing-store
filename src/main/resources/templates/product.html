@@ -10,23 +10,255 @@
 
 </head>
 <body>
-<header th:replace="fragments/general.html :: nav"></header>
+<header th:replace="fragments/general.html :: header"></header>
+<section class="product-details">
+    <div class="image-slider"><img th:src="@{/img/{path} (path = ${product.getImagePath()})}"></div>
+</section>
 
 
 
 
+<section class="product">
+    <h2 class="product-category">Новинки</h2>
+    <button class="pre-btn"><img src="/img/right.png" alt=""></button>
+    <button class="nxt-btn"><img src="/img/right.png" alt=""></button>
+    <div class="product-container">
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 1}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 2}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 3}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 4}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 5}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 6}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 7}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 8}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        +7 more cards
+    </div>
+</section>
+<section class="product">
+    <button class="pre-btn"><img src="/img/right.png" alt=""></button>
+    <button class="nxt-btn"><img src="/img/right.png" alt=""></button>
+    <div class="product-container">
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 1}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 2}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 3}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 4}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 5}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 6}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 7}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        <div class="product-card" th:each="product : ${prod}"
+             th:if="${product.getId() == 8}">
+            <div class="product-image"  th:if="${product.getImagePath()}">
+                <span class="discount-tag">50% скидка</span>
+                <img th:src="@{/img/{path} (path = ${product.getImagePath()})}" class="product-thumb" alt="">
+                <button class="card-btn">добавить в корзину</button>
+            </div>
+            <div class="product-info">
+                <h2 class="product-brand" th:text="${product.getName()}"></h2>
+                <p class="product-short-des" th:text="${product.getDescription()}"></p>
+                <span class="price" th:text="${product.getPrice()}"></span><span class="actual-price" th:text="${product.getOldPrice()}"></span>
+            </div>
+        </div>
+
+        +7 more cards
+    </div>
+</section>
 
 
-
-
-
-
-
-
-
-
-
-
-
+<script th:src="@{/js/home.js}"></script>
 <footer th:replace="fragments/general.html :: footer"></footer>
 </body>

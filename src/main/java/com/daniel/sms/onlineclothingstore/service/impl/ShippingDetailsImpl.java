@@ -1,10 +1,12 @@
 package com.daniel.sms.onlineclothingstore.service.impl;
 
-import com.daniel.sms.onlineclothingstore.entity.Order;
+import com.daniel.sms.onlineclothingstore.entity.Orders;
 import com.daniel.sms.onlineclothingstore.entity.ShippingDetails;
 import com.daniel.sms.onlineclothingstore.repository.ShippingDetailsRepository;
 import com.daniel.sms.onlineclothingstore.service.ShippingDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Import;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +27,7 @@ public class ShippingDetailsImpl implements ShippingDetailsService {
     }
 
     @Override
-    public List<ShippingDetails> findShippingDetailsByOrder(Order order) {
-        return shippingDetailsRepository.findShippingDetailsByOrder(order);
+    public List<ShippingDetails> findShippingDetailsByOrders(Orders orders) {
+        return shippingDetailsRepository.findShippingDetailsByOrders(orders);
     }
 }

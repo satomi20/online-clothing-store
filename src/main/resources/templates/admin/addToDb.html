@@ -1,0 +1,85 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>SMS - Женская одежда премиум класса</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/home.css" th:href="@{/css/home.css}">
+
+</head>
+<body>
+<header th:replace="fragments/general.html :: header"></header>
+
+<div class="container-cfg">
+    <div class="edit-container mx-3">
+        <h1 class="title is-2 has-text-centered mb-6">
+            Add Product</h1>
+        <div>
+            <form th:action="@{/admin/addProduct}" th:object="${product}" method="POST">
+                <div class="field">
+                    <p class="my-3">
+                        <label class="subtitle">Product Name</label>
+                    </p>
+                    <input class="input" th:field="*{name}" type="text" required>
+                </div>
+                <div class="field">
+                    <p class="my-3">
+                        <label class="subtitle">URL Name</label>
+                    </p>
+                    <input type="text" th:field="*{urlName}" class="input" required>
+                </div>
+                <div class="field">
+                    <p class="my-3">
+                        <label class="subtitle">Article</label>
+                    </p>
+                    <input type="text" th:field="*{article}" class="input" required>
+                </div>
+
+                <div class="field">
+                    <p class="my-3">
+                        <label class="subtitle">Color</label>
+                    </p>
+                    <input type="text" th:field="*{color}" class="input" required>
+                </div>
+
+                <div class="field">
+                    <p class="my-3">
+                        <label class="subtitle">Price</label>
+                    </p>
+                    <input th:field="*{price}" class="input" type="number" required>
+                </div>
+                <div class="field">
+                    <p class="my-3">
+                        <label class="subtitle">Old Price</label>
+                    </p>
+                    <input th:field="*{oldPrice}" class="input" type="number" required>
+                </div>
+                <div class="field">
+                    <p class="my-3">
+                        <label class="subtitle">Discount Rate</label>
+                    </p>
+                    <input th:field="*{percentDiscount}" class="input" type="number" required>
+                </div>
+                <div class="field">
+                    <p class="my-3">
+                        <label class="subtitle">Description</label>
+                    </p>
+                    <input th:field="*{description}" class="input" type="text" required>
+                </div>
+                <div class="field">
+                    <p class="my-3">
+                        <label class="subtitle">Image Path</label>
+                    </p>
+                    <input th:field="*{imagePath}" class="input" type="text" required>
+                </div>
+
+                <button type="submit" class="button my-3 is-light is-primary" id="add-button">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments/general.html :: footer"></footer>
+</body>
+</html>

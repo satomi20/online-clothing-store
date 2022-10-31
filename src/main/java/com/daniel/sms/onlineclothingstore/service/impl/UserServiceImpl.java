@@ -1,42 +1,51 @@
 package com.daniel.sms.onlineclothingstore.service.impl;
 
-import com.daniel.sms.onlineclothingstore.configuration.SecurityConfig;
+import com.daniel.sms.onlineclothingstore.configuration.PasswordConfig;
+
+import com.daniel.sms.onlineclothingstore.entity.Role;
 import com.daniel.sms.onlineclothingstore.entity.User;
 import com.daniel.sms.onlineclothingstore.entity.UserAddress;
-import com.daniel.sms.onlineclothingstore.enums.Role;
+import com.daniel.sms.onlineclothingstore.repository.RoleRepository;
 import com.daniel.sms.onlineclothingstore.repository.UserRepository;
 import com.daniel.sms.onlineclothingstore.service.UserService;
+import jdk.jshell.spi.ExecutionControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import javax.transaction.Transactional;
+import java.text.MessageFormat;
+import java.util.*;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
-    private final com.daniel.sms.onlineclothingstore.configuration.SecurityConfig securityConfig;
+    private final PasswordConfig passwordConfig;
+    private final RoleRepository roleRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, SecurityConfig securityConfig) {
+    public UserServiceImpl(UserRepository userRepository, PasswordConfig passwordConfig, RoleRepository roleRepository) {
         this.userRepository = userRepository;
-        this.securityConfig = securityConfig;
+        this.passwordConfig = passwordConfig;
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-
-        final User user = userRepository.findByEmail(email);
-        if(user == null) {
-            throw new UsernameNotFoundException("Пользователь не найден");
+       User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new UsernameNotFoundException("User not found");
         }
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), Collections.singletonList(user.getUserRole()));
+
+        return user;
+    }
+
+    @Override
+    public User findById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
@@ -44,39 +53,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return userRepository.findAll();
     }
 
+    /*  public User findAddressById(Long id) {
+        return userRepository.findAddressById(id).orElse(null);
+    }*/
 
-    @Override
-    public User findByEmail(String email) {
-        return userRepository.findByEmail(email);
-    }
+    @Transactional
+    public boolean save(User user) {
+        User userFromDb = userRepository.findByEmail(user.getEmail());
 
-    @Override
-    public boolean addUser(User user) {
-        User databaseUser = userRepository.findByEmail(user.getEmail());
-        if (databaseUser != null) {
-            return false;
+        if (userFromDb != null) {
+            return new UsernameNotFoundException("User already exists").equals(userFromDb);
         }
-        user.setUserRole(com.daniel.sms.onlineclothingstore.enums.Role.ROLE_USER);
-        user.setEmail(user.getEmail());
-        user.setPassword(securityConfig.getPasswordEncoder().encode(user.getPassword()));
+        user.setPassword(passwordConfig.getPasswordEncoder().encode(user.getPassword()));
+        user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
         userRepository.save(user);
         return true;
-    }
-
-    @Override
-    public void updatePassword(User user, String password, String newPassword) {
-        if (securityConfig.getPasswordEncoder().matches(password, user.getPassword())) {
-            user.setPassword(securityConfig.getPasswordEncoder().encode(newPassword));
-            userRepository.save(user);
-        }
-    }
-
-    @Override
-    public void updateEmail(User user, String email, String newEmail) {
-        if (user.getEmail().equals(email)) {
-            user.setEmail(newEmail);
-            userRepository.save(user);
-        }
     }
 
     @Override
@@ -87,11 +78,34 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userRepository.save(user);
     }
 
+    @Transactional
+    public void updateEmailAndPassword(User user, String newEmail, String newPassword) {
+            user.setEmail(newEmail);
+            user.setPassword(passwordConfig.getPasswordEncoder().encode(newPassword));
+            userRepository.save(user);
+    }
+
+    @Transactional
+    public void updateUserAddress(User user, UserAddress address) {
+        user.setUserAddresses(new HashSet<>(Collections.singleton(address)));
+        userRepository.save(user);
+    }
+
     @Override
+    public void saveUserById(String firstname, String lastname, String email, String password, String phoneNumber, Long id) {
+        userRepository.saveUserById(firstname, lastname, phoneNumber, email, password, id);
+    }
+
+    @Override
+    public void delete(Long id) {
+        userRepository.deleteById(id);
+    }
+
+    /*@Override
     public User deleteUser(User user) {
-        if (user.getUserRole().equals(Role.ROLE_ADMIN)){
+        if (user.getRoles().equals("ROLE_ADMIN")) {
             userRepository.delete(user);
         }
         return user;
-    }
+    }*/
 }

@@ -1,0 +1,160 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>SMS - Женская одежда премиум класса</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/home.css" th:href="@{/css/home.css}">
+
+</head>
+<body>
+<header th:replace="fragments/general.html :: header"></header>
+
+<div class="container-cfg">
+
+    <div class="inside-cfg">
+    <h5>Изменение товара</h5>
+
+    <h5 th:text="${prod.getId()}"></h5>
+
+    <form id='add-form' th:action="@{/admin/editProduct}"  method="POST" >
+        <!--<h5 th:text="${}"></h5>-->
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Название товара:</label>
+            <div class="col-sm-6">
+                <input type="text" name="name" class="form-control" th:value= "${prod.getName()}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">URL:</label>
+            <div class="col-sm-6">
+                <input type="text" name="urlName" class="form-control" th:value="${prod.getUrlName()}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Артикул товара:</label>
+            <div class="col-sm-6">
+                <input type="text" name="article" class="form-control" th:value="${prod.getArticle()}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Цвет товара:</label>
+            <div class="col-sm-6">
+                <input type="text" name="color" class="form-control" th:value="${prod.getColor()}"/>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Описание:</label>
+            <div class="col-sm-6">
+                <input type="text" name="description" class="form-control" th:value="${prod.getDescription()}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Путь к фото:</label>
+            <div class="col-sm-6">
+                <input type="text" name="imagePath" class="form-control" th:value="${prod.getImagePath()}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Новый продукт:</label>
+            <div class="col-sm-6">
+                <input type="text" name="newProd" class="form-control" th:value="${prod.getNew_product()}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Распродажа:</label>
+            <div class="col-sm-6">
+                <input type="text" name="sale" class="form-control" th:value="${prod.getSale()}"/>
+            </div>
+        </div>
+        <input type="hidden" name="id" th:value="${prod.getId()}"/>
+
+        <div>
+            <input type="submit" value="Продолжить"/>
+        </div>
+    </form>
+    </div>
+
+    <div class="inside-cfg">
+    <h5>Изменение цены</h5>
+    <form th:action="@{/admin/addDiscount}" method="post" >
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Введите старую цену: </label>
+            <div class="col-sm-4">
+                <input type="number" name="oldPrice" class="form-control" th:value="${oldprice}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Введите скидку: </label>
+            <div class="col-sm-4">
+                <input type="number" name="discount" class="form-control" th:value="${discount}"/>
+            </div>
+        </div>
+        <input type="hidden" name="id" th:value="${prod.getId()}"/>
+        <div>
+            <input type="submit" value="Продолжить"/>
+        </div>
+    </form>
+    </div>
+
+    <div class="inside-cfg">
+        <div class="jjj" th:each="category : ${categoryList}">
+            <h5 th:text="${category.getCategoryId()}"></h5>
+            <h5 th:text="${category.getName()}"></h5>
+            <h5 th:text="${category.getUrlName()}"></h5>
+        </div>
+        <h5>Изменение категории</h5>
+        <form th:action="@{/admin/updateCategory}" method="post" >
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Введите новую категорию: </label>
+                <div class="col-sm-4">
+                    <input type="number" name="categoryId" class="form-control" th:value="${category}"/>
+                </div>
+            </div>
+            <input type="hidden" name="id" th:value="${prod.getId()}"/>
+            <div>
+                <input type="submit" value="Продолжить"/>
+            </div>
+        </form>
+    </div>
+
+    <div class="inside-cfg">
+        <h1>Options</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>SKU</th>
+                <th>SIZE</th>
+                <th>QUANTITY</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="option : ${options}">
+                <tr>
+                    <td th:text="${option.getSku()}"></td>
+                    <td th:text="${option.getSize()}"></td>
+                    <td th:text="${option.getQuantity()}"></td>
+                    <td><a class="btn-todo" th:href="@{/admin/editProduct/{product}/{option} (product = ${prod.getId()}, option = ${option.getId()})}">EDIT OPTION</a></td>
+                    <td> <form class="d-inline" th:action="@{/admin/removeOption/{path} (path = ${option.getId()})}"  method="post">
+                        <button type="submit" class="btn btn-warning">Удалить</button>
+                        <div class="from-group mb-2">
+                        </div>
+                    </form>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+        <button type="button"><a class="dsdf" th:href="@{/admin/addNewOption/{product} (product = ${prod.getId()})}">ADD</a></button>
+    </div>
+
+</div>
+
+
+<footer th:replace="fragments/general.html :: footer"></footer>
+
+</body>
+</html>

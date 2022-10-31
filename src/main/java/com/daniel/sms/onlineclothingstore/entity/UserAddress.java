@@ -10,7 +10,9 @@ import javax.validation.constraints.Max;
 @Table(name = "user_address")
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(of = {"id", "user"})
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserAddress {
 
   @Id
@@ -26,7 +28,23 @@ public class UserAddress {
   @Max(value = 6, message = "Wrong number")
   private String postalCode;
 
-  @ManyToOne(cascade = CascadeType.ALL)
+  @ManyToOne(cascade = CascadeType.REMOVE)
   @JoinColumn(name="user_id", nullable=false)
-  private User userId;
+  private User user;
+
+  public UserAddress(String address, String city, String country) {
+  }
+  public UserAddress(User user){
+    this.user = user;
+  }
+
+  @Override
+  public String toString() {
+    return
+            "id=" + id +
+            ", адрес='" + adress + '\'' +
+            ", страна='" + country + '\'' +
+            ", город='" + city + '\'' +
+            ", почтовый код='" + postalCode + '\'';
+  }
 }

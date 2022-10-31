@@ -17,13 +17,13 @@ footer{
 }
 
 .footer-ul-container{
-    width: 30%;
+    width: 25%;
     display: flex;
     justify-content: space-between;
 }
 
 .category{
-    width: 200px;
+    width: 150px;
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 10px;
     list-style: none;

@@ -1,20 +1,21 @@
 package com.daniel.sms.onlineclothingstore.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "category")
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(of = {"id, name"})
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class Category {
 
   @Id
@@ -28,12 +29,15 @@ public class Category {
   @Column(name = "url_name")
   private String urlName;
 
-  @Column(name = "parent_id")
-  private Long parentId;
+  @OneToMany(mappedBy="category", cascade =  CascadeType.ALL)
+  private Set<Product> products;
 
-  @ManyToMany(cascade = CascadeType.ALL)
-  @JoinTable(name = "product_category",
-          joinColumns = @JoinColumn(name = "category_id"),
-          inverseJoinColumns = @JoinColumn(name = "product_id"))
-  private Set<Product> productCategory = new HashSet<>();
+  @Override
+  public String toString() {
+    return "Category{" +
+            "categoryId=" + categoryId +
+            ", name='" + name + '\'' +
+            ", urlName='" + urlName +
+            '}';
+  }
 }

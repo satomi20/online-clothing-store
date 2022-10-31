@@ -1,0 +1,113 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>SMS - Женская одежда премиум класса</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/home.css" th:href="@{/css/home.css}">
+
+</head>
+<body>
+<header th:replace="fragments/general.html :: header"></header>
+
+<div class="container-cfg">
+<h1>HILE MY FUHRER</h1>
+<!--<a th:href="@{/admin/user-info}">Настройки Пользователя</a>-->
+<div class="inside-cfg">
+    <div th:if="${not #lists.isEmpty(users)}">
+        <h1>Users</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Delete</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="user : ${users}">
+                <tr>
+                    <td th:text="${user.getId()}"></td>
+                    <td th:text="${user.getFirstName()}"></td>
+                    <td th:text="${user.getLastName()}"></td>
+                    <td th:text="${user.getEmail()}"></td>
+                    <td> <form class="d-inline" th:action="@{/admin/remove/{path} (path = ${user.getId()})}"  method="post">
+                        <button type="submit" class="btn btn-warning">Удалить</button>
+                        <div class="from-group mb-2">
+                        </div>
+                    </form>
+                    </td>
+                    <td th:text="${user.getPhoneNumber()}"></td>
+                    <td th:text="${user.getUserAddresses()}"></td>
+
+                    <!--   <td><a class="btn btn-primary" th:href="@{/user/editUser}?id=${user.getId()}">Edit</a></td>
+                       <td><a class="btn btn-danger" th:href="@{/user/deleteUser}?id=${user.getId()}">Delete</a></td>-->
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="inside-cfg">
+    <div th:if="${not #lists.isEmpty(products)}">
+        <h1>Products</h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>urlName</th>
+                <th>Article</th>
+                <th>Color</th>
+                <th>Price</th>
+                <th>OldPrice</th>
+                <th>ImagePath</th>
+                <th>Description</th>
+                <th>PercentDiscount</th>
+                <th>Sale</th>
+                <th>New</th>
+                <th>Update Date</th>
+                <th>Category</th>
+                <th>ProductOptions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="prod : ${products}">
+                <tr>
+                    <td th:text="${prod.getId()}"></td>
+                    <td th:text="${prod.getName()}"></td>
+                    <td th:text="${prod.getUrlName()}"></td>
+                    <td th:text="${prod.getArticle()}"></td>
+                    <td th:text="${prod.getColor()}"></td>
+                    <td th:text="${prod.getPrice()}"></td>
+                    <td th:text="${prod.getOldPrice()}"></td>
+                    <td th:text="${prod.getImagePath()}"></td>
+                    <td th:text="${prod.getDescription()}"></td>
+                    <td th:text="${prod.getPercentDiscount()}"></td>
+                    <td th:text="${prod.getSale()}"></td>
+                    <td th:text="${prod.getNew_product()}"></td>
+                    <td th:text="${prod.updatedAt}"></td>
+                    <td th:text="${prod.getCategory()}"></td>
+                    <td th:text="${prod.getProductOptions()}"></td>
+                    <td><a class="btn btn-primary" th:href="@{/admin/editProduct/{path} (path = ${prod.getId()})}">Edit</a></td>
+                    <td><a class="btn btn-danger" th:href="@{/admin/deleteProduct/{path} (path = ${prod.getId()})}">Delete</a></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+        <td><a class="btn btn-danger" th:href="@{/admin/addProduct}">ADD</a></td>
+    </div>
+</div>
+</div>
+
+
+<footer th:replace="fragments/general.html :: footer"></footer>
+</body>
+</html>

@@ -7,20 +7,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @Getter
 @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Order {
+public class Orders {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "sessionId")
+  @Column(name = "session_id")
   private String sessionId;
   @Column(name = "shipping")
   private Long shipping;
@@ -32,7 +32,7 @@ public class Order {
   private java.sql.Timestamp orderDate;
   @Column(name = "status")
   private String status;
-  @Column(name = "createdAt")
+  @Column(name = "created_at")
   private java.sql.Timestamp createdAt;
 
   @ManyToOne(cascade = CascadeType.ALL)
@@ -43,7 +43,7 @@ public class Order {
   @JoinColumn(name = "user_id", nullable = false)
   private User userId;
 
-  @OneToMany(mappedBy = "orderId")
+  @OneToMany(mappedBy = "ordersId")
   private Set<OrderDetails> orderDetails = new HashSet<OrderDetails>();
 
   private Long getTotalPrice() {
@@ -56,7 +56,7 @@ public class Order {
 
   private void deleteOrderDetails(OrderDetails order){
     orderDetails.remove(order);
-    order.setOrderId(this);
+    order.setOrdersId(this);
   }
 
   private Long getOrderQuantity() {

@@ -5,8 +5,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Size;
-import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -44,7 +42,7 @@ public class ShippingDetails {
   private String comment;
 
   @OneToMany(mappedBy="shippingDetailsId")
-  private Set<Order> orders;
+  private Set<Orders> orders;
 
 
 

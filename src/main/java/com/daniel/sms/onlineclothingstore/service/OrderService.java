@@ -1,6 +1,6 @@
 package com.daniel.sms.onlineclothingstore.service;
 
-import com.daniel.sms.onlineclothingstore.entity.Order;
+import com.daniel.sms.onlineclothingstore.entity.Orders;
 import com.daniel.sms.onlineclothingstore.entity.User;
 
 import java.util.List;
@@ -8,15 +8,19 @@ import java.util.Optional;
 
 public interface OrderService {
 
-    List<Order> findAll();
+    List<Orders> findAll();
 
-    Optional<Order> findById(Long id);
+    Optional<Orders> findById(Long id);
 
-    Order save(Order order);
+    Orders save(Orders orders);
 
     void delete(Long id);
 
     void deleteAll();
 
-    List<Order> findOrderByUser(User user);
+    List<Orders> findOrderByUser(User user);
+
+    Long maxOrderPrice();
+
+    Long minOrderPrice();
 }

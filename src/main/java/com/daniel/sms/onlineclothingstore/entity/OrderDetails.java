@@ -18,8 +18,8 @@ public class OrderDetails {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name = "order_id")
-  private Order orderId;
+  @JoinColumn(name = "orders_id")
+  private Orders ordersId;
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "product_id")
   private Product productId;

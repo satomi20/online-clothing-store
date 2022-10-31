@@ -1,6 +1,7 @@
 package com.daniel.sms.onlineclothingstore.entity;
 
 
+import com.daniel.sms.onlineclothingstore.enums.Color;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,7 +16,7 @@ import java.util.Set;
 @Table(name = "product")
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(of = {"id", "article"})
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
@@ -23,6 +24,7 @@ public class Product {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "product_id")
   private Long id;
 
   @Column(name = "name")
@@ -31,10 +33,13 @@ public class Product {
   @Column(name = "url_name")
   private String urlName;
   @Column(name = "article")
-  @Size(min = 10, max = 10, message = "The article must consist of 10 symbols")
+  @Size(min = 0, max = 20, message = "The article must consist of 20 symbols")
   private String article;
+
+  @Column(name = "color")
+  private String color;
+
   @Column(name = "price")
-  @NotEmpty
   @PositiveOrZero
   private Long price;
   @Column(name = "old_price")
@@ -56,15 +61,27 @@ public class Product {
   @OneToMany(mappedBy = "productId")
   private Set<OrderDetails> userGroups = new HashSet<OrderDetails>();
 
-  @ManyToMany(mappedBy = "productCategory")
-  private Set<Category> categories = new HashSet<>();
+  @ManyToOne
+  @JoinColumn(name = "category_id")
+  private Category category;
 
-  @ManyToMany(mappedBy = "productOption")
-  private Set<Option> options = new HashSet<>();
+  @OneToMany(mappedBy = "productId", cascade = CascadeType.PERSIST, orphanRemoval = true)
+  private Set<ProductOption> productOptions = new HashSet<>();
 
   @Column(name = "createdAt")
   private java.sql.Timestamp createdAt;
   @Column(name = "updatedAt")
   private java.sql.Timestamp updatedAt;
 
+  /*public Long getPrice() {
+    return oldPrice - (oldPrice * percentDiscount / 100);
+  }*/
+
+  /*public static void main(String[] args) {
+    Product product = new Product();
+    product.setOldPrice(7000L);
+    product.setPercentDiscount(57L);
+    Long price = product.getPrice();
+    System.out.println(price);
+  }*/
 }

@@ -1,55 +1,66 @@
 package com.daniel.sms.onlineclothingstore.service.impl;
 
-import com.daniel.sms.onlineclothingstore.entity.Order;
+import com.daniel.sms.onlineclothingstore.entity.Orders;
 import com.daniel.sms.onlineclothingstore.entity.User;
-import com.daniel.sms.onlineclothingstore.repository.OrderDetailsRepository;
-import com.daniel.sms.onlineclothingstore.repository.OrderRepository;
-import com.daniel.sms.onlineclothingstore.repository.ShippingDetailsRepository;
-import com.daniel.sms.onlineclothingstore.repository.UserRepository;
+import com.daniel.sms.onlineclothingstore.repository.MyOrdersRepository;
 import com.daniel.sms.onlineclothingstore.service.OrderService;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Import;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
-@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderRepository orderRepository;
-    private final UserRepository userRepository;
-    private final ShippingDetailsRepository shippingDetailsRepository;
-    private final OrderDetailsRepository orderDetailsRepository;
+    private final MyOrdersRepository myOrdersRepository;
 
-
-    @Override
-    public List<Order> findAll() {
-        return orderRepository.findAll();
+    @Autowired
+    public OrderServiceImpl(MyOrdersRepository orderRepository) {
+        this.myOrdersRepository = orderRepository;
     }
 
     @Override
-    public Optional<Order> findById(Long id) {
-        return orderRepository.findById(id);
+    public List<Orders> findAll() {
+        return myOrdersRepository.findAll();
     }
 
     @Override
-    public Order save(Order order) {
-        return null;
+    public Optional<Orders> findById(Long id) {
+        return myOrdersRepository.findById(id);
+    }
+
+    @Override
+    public Orders save(Orders orders) {
+        return myOrdersRepository.save(orders);
     }
 
     @Override
     public void delete(Long id) {
-
+        myOrdersRepository.deleteById(id);
     }
+
 
     @Override
     public void deleteAll() {
+        myOrdersRepository.deleteAll();
+    }
 
+
+    @Override
+    public List<Orders> findOrderByUser(User user) {
+        return myOrdersRepository.findByUserId(user.getId());
     }
 
     @Override
-    public List<Order> findOrderByUser(User user) {
-        return orderRepository.findByUser(user);
+    public Long maxOrderPrice() {
+        return null;
+    }
+
+    @Override
+    public Long minOrderPrice() {
+        return null;
     }
 }

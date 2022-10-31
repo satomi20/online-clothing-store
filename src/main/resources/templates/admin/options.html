@@ -1,0 +1,77 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="IE=edge">
+    <meta name="viewport" content="width-device-width, initial-scale=1.0">
+    <title>SMS - Женская одежда премиум класса</title>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/home.css" th:href="@{/css/home.css}">
+
+</head>
+<body>
+<header th:replace="fragments/general.html :: header"></header>
+
+<div class="container-cfg">
+<div class="inside-cfg">
+    <h5>Изменение категории</h5>
+    <form th:action="@{/admin/updateProductOption}" method="post" >
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Введите SKU: </label>
+            <div class="col-sm-4">
+                <input type="number" name="sku" class="form-control" th:value="${sku}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Введите размер: </label>
+            <div class="col-sm-4">
+                <input type="text" name="size" class="form-control" th:value="${size}"/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Введите новое количество: </label>
+            <div class="col-sm-4">
+                <input type="number" name="quantity" class="form-control" th:value="${quantity}"/>
+            </div>
+        </div>
+        <input type="hidden" name="id" th:value="${opt.getId()}"/>
+        <input type="hidden" name="id" th:value="${prod.getId()}"/>
+        <div>
+            <input type="submit" value="Продолжить"/>
+        </div>
+    </form>
+</div>
+
+
+<div class="inside-cfg">
+    <h5>Добавить новую опцию</h5>
+    <form id='add-form' th:action="@{/admin/addNewOption}" th:object="${productOption}" method="POST" >
+        <div class="form-group row" th:each="option : ${productOption}">
+            <label class="col-sm-2 col-form-label">Баркод: </label>
+            <div class="col-sm-4">
+                <input type="number" name="sku" class="form-control" th:field="*{sku}"/>
+            </div>
+        </div>
+        <div class="form-group row" th:each="option : ${productOption}">
+            <label class="col-sm-2 col-form-label">Размер: </label>
+            <div class="col-sm-4">
+                <input type="text" name="size" class="form-control" th:field="*{size}"/>
+            </div>
+        </div>
+        <div class="form-group row" th:each="option : ${productOption}">
+            <label class="col-sm-2 col-form-label">Количество: </label>
+            <div class="col-sm-4">
+                <input type="number" name="quantity" class="form-control" th:field="*{quantity}"/>
+            </div>
+        </div>
+        <input type="hidden" name="id" th:value="${prod.getId()}"/>
+        <div>
+            <input type="submit" value="Продолжить"/>
+        </div>
+    </form>
+</div>
+</div>
+
+<footer th:replace="fragments/general.html :: footer"></footer>
+</body>
+</html>
